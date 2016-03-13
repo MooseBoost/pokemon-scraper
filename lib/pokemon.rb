@@ -9,25 +9,27 @@ class Pokemon
   end
   
   def self.save(name, type, db)
-    db.execute(
-      "INSERT INTO 
+    sql = <<-SQL
+      INSERT INTO 
         pokemon (name, type) 
       VALUES
-        ('#{name}', '#{type}');"
-      )
+        ('#{name}', '#{type}');
+    SQL
+    
+    db.execute(sql)
   end
   
   def self.find(id, db)
-    found_array = db.execute(
-      "SELECT 
+    sql = <<-SQL
+      SELECT 
         id, name, type
       FROM 
         pokemon
       WHERE 
-        id = #{id};"
-    )
-                
-    found_array.first            
+        id = #{id};
+    SQL
+    
+    db.execute(sql).first
   end
   
 end
