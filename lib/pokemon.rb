@@ -13,10 +13,10 @@ class Pokemon
       INSERT INTO 
         pokemon (name, type) 
       VALUES
-        ('#{name}', '#{type}');
+        (?, ?);
     SQL
     
-    db.execute(sql)
+    db.execute(sql, name, type)
   end
   
   def self.find(id, db)
@@ -26,10 +26,10 @@ class Pokemon
       FROM 
         pokemon
       WHERE 
-        id = #{id};
+        id = ?;
     SQL
     
-    db.execute(sql).first
+    db.execute(sql, id).first
   end
   
 end
